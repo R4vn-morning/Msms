@@ -943,9 +943,7 @@ jobs:
           git add .
           git commit -q -m "APK build ${{ github.run_number }}"
           git push -f "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" apk-builds
-          {
-            echo "### APK ready (no zip)"
-            echo ""
-            echo "Install this one: https://github.com/${{ github.repository }}/raw/apk-builds/R4Vn-debug.apk"
-            echo ""
-            ech
+          S="$GITHUB_STEP_SUMMARY"
+          echo "### APK ready (no zip)" >> "$S"
+          echo "" >> "$S"
+          echo "Install this one: https://github.com/${{ github.repository }}/raw/apk-builds/R4Vn-debug.apk" >>
