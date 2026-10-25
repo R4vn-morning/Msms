@@ -930,6 +930,7 @@ jobs:
 
       - name: Publish APKs to a branch (direct download, no zip)
         if: always()
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -943,7 +944,8 @@ jobs:
           git add .
           git commit -q -m "APK build ${{ github.run_number }}"
           git push -f "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" apk-builds
-          S="$GITHUB_STEP_SUMMARY"
-          echo "### APK ready (no zip)" >> "$S"
-          echo "" >> "$S"
-          echo "Install this one: https://github.com/${{ github.repository }}/raw/apk-builds/R4Vn-debug.apk" >>
+          echo "Direct link: https://github.com/${{ github.repository }}/raw/apk-builds/R4Vn-debug.apk"
+
+      - name: Publish APKs to Releases
+        if: always()
+        continue-on-err
